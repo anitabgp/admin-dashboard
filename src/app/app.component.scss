@@ -1,0 +1,81 @@
+
+    table {
+     width: 100%;
+     display: flex;
+           justify-items: center;
+
+      }
+      .example-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        vertical-align: middle;
+                //  align-items: center;
+        // justify-content: center;
+      }
+        .mat-table {
+          display: inline-block;
+         }
+      
+         th.mat-sort-header-sorted {
+       color: black;
+        }
+   
+      
+     .btn{
+      height:15px;
+      width:40px;
+      display: inline-block;
+      margin-left: 10%;
+     }
+    .example-input {
+     margin-top: 5%;
+     max-width: 100%;
+     display: inline-block;
+     margin-left: 10px;
+     }
+    body  {
+    font-family: 'Covered By Your Grace', cursive;
+    line-height: 1.25;
+    }
+    
+    @media(max-width: 600px) {
+     
+    .example-container {
+      display: inline-block;
+      // flex-direction: column;
+      width: 100%;
+      
+    }
+  
+    .mat-header-row {
+      display: inline-block;
+      
+    }
+       }
+    
+    .mat-table .mat-row .mat-cell { 
+      display: inline-block;
+       
+    }
+    
+    
+   
+      
+    
+   
+  // @media screen and (max-width: 600px) {
+    //       .mat-table {
+    //    display: inline-block;
+    // }
+    // .example-input {
+    //   display: flex;
+    //   flex-direction: column;
+    //   margin-top: 3%;
+    //   width: 100%;
+    //       }
+    // .mat-table caption {
+    //   font-size: 1em;
+    // }
+    
+        
