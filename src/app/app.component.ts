@@ -1,13 +1,12 @@
 
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { DataSource, SelectionModel } from '@angular/cdk/collections';
+import { SelectionModel } from '@angular/cdk/collections';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { HttpClient } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-
-
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable, Subscription } from 'rxjs';
 
 
 
@@ -25,57 +24,108 @@ export class AppComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource<any>();
   selection = new SelectionModel<any>(true, []);
   userFilters: any[] = [];
-  filterDictionary: any;
+  filterValue: any;
   subscription: any;
+  status: any;
+  Observable: any;
   data: any[] = [];
+  currentSelectedData:any[] = [];
+  rowClicked:any;
+    
   @ViewChild(MatPaginator) paginator: any;
-
-  constructor(private http: HttpClient) { }
+  @ViewChild(MatSort) sort: any;
+  constructor(private http: HttpClient) {
+    
+   }
 
   /** Whether the number of selected elements matches the total number of rows. */
 
   ngOnInit() {
     this.userFilters.push({ names: 'name', value: 'role', emails: 'email' });
+    
     this.subscription = this.http.get("https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json").subscribe({
       next: (data) => {
         this.data = JSON.parse(JSON.stringify(data));
         this.dataSource = new MatTableDataSource(this.data);
         this.dataSource.paginator = this.paginator;
-
+        this.dataSource.sort = this.sort;
+            
       },
       error: (e) => console.error(e),
       complete: () => {
         console.log(this.data);
       }
+       }
+      )
+     }
+    //  selectedIndex = -1;
+
+    //    highLight(row:any) {
+    //    this.selectedIndex = row.id;
+    //   }
+  
+    changeTableRowColor(row: any) { 
+      if(this.rowClicked === row) this.rowClicked = -1;
+      else this.rowClicked = row;
     }
-    )
-  }
 
-  ngAfterViewInit() {
-  }
+     toggle($event:any, row:any){
+      $event ? this.selection.toggle(row) : null
+     }
 
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
-  }
+      ngAfterViewInit() {
+       }
+
+      isCurrentPageSelected() {
+    
+    const numSelected= this.selection.selected.length;
+    const numRows = this.paginator.pageSize;
+    return this.currentSelectedData[0] === this.data[this.paginator.pageIndex*this.paginator.pageSize] && numSelected === numRows;
+       }
+  
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   toggleAllRows() {
-    if (this.isAllSelected()) {
+    if (this.isCurrentPageSelected()) {
       this.selection.clear();
       return;
     }
+   // this.paginator.pageIndex*
+   this.currentSelectedData = this.data.slice((this.paginator.pageIndex*this.paginator.pageSize),
+    (this.paginator.pageIndex+1)*this.paginator.pageSize);
+    this.selection.select(...this.currentSelectedData);
+  }
+   
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
-    this.selection.select(...this.dataSource.data);
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
 
-  deletebut() {
-    window.alert("delbutton");
+  deleteSelected() {
+    this.selection.selected.forEach(user => {
+      let index: number = this.data.findIndex(d => d === user);
+      this.data.splice(index, 1)
+      this.dataSource = new MatTableDataSource(this.data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
+    this.selection.clear();
   }
-  editbut() {
-    window.alert("editbutton");
+
+  handleDelete(row: any) {
+    this.data = this.data.filter(data => data.id !== row.id);
+    this.dataSource = new MatTableDataSource(this.data);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  handleEdit(row: any) {
+      row['edit'] = true;
   }
 
   /** The label for the checkbox on the passed row */
@@ -83,16 +133,18 @@ export class AppComponent implements OnInit, OnDestroy {
     return "area-label";
   }
 
-  checkboxLabel1(row: any): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
-    }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
-  }
-  ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+     checkboxLabel1(row: any): string {
+      if (!row) {
+      return `${this.isCurrentPageSelected() ? 'deselect' : 'select'} 10`;
+        }
+       return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+    
+        }
 
-    }
-  }
-}
+     ngOnDestroy(): void {
+       if (this.subscription) {
+        this.subscription.unsubscribe();
+
+         }
+        }
+      }

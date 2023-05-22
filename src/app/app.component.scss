@@ -1,66 +1,69 @@
 
-    table {
+   body{
+    margin:10px;
+   }
+   table,tr {
      width: 100%;
-     display: flex;
-           justify-items: center;
-
+     overflow-x:auto;
+              }
+              
+      td, th {
+        width: 25%;
       }
+       
       .example-container {
         display: flex;
         flex-direction: column;
         width: 100%;
-        vertical-align: middle;
-                //  align-items: center;
-        // justify-content: center;
-      }
-        .mat-table {
-          display: inline-block;
-         }
+        margin: 10px;
+             }
+        
       
          th.mat-sort-header-sorted {
        color: black;
-        }
-   
-      
-     .btn{
-      height:15px;
-      width:40px;
-      display: inline-block;
-      margin-left: 10%;
-     }
+
+               }
+               .highlight{
+                background: #42A948; /* green */
+              }
+             
     .example-input {
-     margin-top: 5%;
-     max-width: 100%;
+     margin-top: 3%;
+     width: 100%;
      display: inline-block;
-     margin-left: 10px;
+     margin-left: 15px;
      }
-    body  {
-    font-family: 'Covered By Your Grace', cursive;
-    line-height: 1.25;
-    }
+  //     tr:hover,td:hover {
+  //     background-color: hwb(0 72% 25%);
+      
+  // }
     
     @media(max-width: 600px) {
      
     .example-container {
-      display: inline-block;
-      // flex-direction: column;
+      display: flex;
+      flex-direction: column;
       width: 100%;
-      
+      overflow-x:auto;
     }
   
     .mat-header-row {
-      display: inline-block;
-      
+      display: flex;
+      flex-direction: column;
+      width: 100%;
     }
+    table ,tr{
+       display: inline-block;  
+               
        }
-    
-    .mat-table .mat-row .mat-cell { 
-      display: inline-block;
        
-    }
-    
-    
-   
+       td, th {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+       }
+        
+  }
       
     
    
