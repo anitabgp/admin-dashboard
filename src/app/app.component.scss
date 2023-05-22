@@ -1,81 +1,63 @@
 
-   table,tr {
-     width: 100vw;
-     overflow-x:auto;
-              }
-              
-      td, th {
-        width: 25vw;
-      }
-       
-      .example-container {
-        display: flex;
-        flex-direction: column;
-        width: 100vw;
-       
-             }
-        
-      
-         th.mat-sort-header-sorted {
-       color: black;
-
-               }
-               .highlight{
-                background: #42A948; /* green */
-              }
-             
-    .example-input {
-     margin-top: 3%;
-     width: 100vw;
-     display: inline-block;
-     height:20px;
-     }
-  //     tr:hover,td:hover {
-  //     background-color: hwb(0 72% 25%);
-      
-  // }
-    
-    @media(max-width: 600px) {
-     
-    .example-container {
-      display: flex;
-      flex-direction: column;
-      width: 100vw;
-      overflow-x:auto;
-    }
+table,
+tr {
+  width: 100%;
   
-    .mat-header-row {
-      display: flex;
-      flex-direction: column;
-      width: 100vw;
-    }
-    table ,tr{
-       display: inline-block;  
-               
-       }
-       
-       td, th {
-        display: flex;
-        flex-direction: column;
-        width: 100vw;
-       }
-        
+}
+
+td,
+th {
+  width: 25%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+  
+}
+
+.highlight {
+  background: #42A948;
+  /* green */
+}
+
+.example-input {
+  margin-top: 20px;
+  width: 100%;
+  display: inline-block;
+
+}
+
+
+@media(max-width: 600px) {
+  .example-input {
+    margin-top: 20px;
+    width: 100%;
+    display: inline-block;
+  
   }
-      
-    
+    table,tr,td,th{
+      display:inline-block;
+     
+    }
+    .mat-table, .mat-cell, .mat-header-cell{
+      display:inline-block;
+    }
+  .mat-row{
+    display: inline-block;
+  }
+  .mat-header-row {
+    display: inline-block;
+  
    
-  // @media screen and (max-width: 600px) {
-    //       .mat-table {
-    //    display: inline-block;
-    // }
-    // .example-input {
-    //   display: flex;
-    //   flex-direction: column;
-    //   margin-top: 3%;
-    //   width: 100%;
-    //       }
-    // .mat-table caption {
-    //   font-size: 1em;
-    // }
-    
-        
+  }
+  .container {
+    display:inline-block;
+    width: 80%;
+    margin: 10%;
+  }
+   }
+
+.container {
+  width: 80%;
+  margin: 10%;
+}

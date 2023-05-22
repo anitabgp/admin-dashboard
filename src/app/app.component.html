@@ -1,7 +1,9 @@
 
-<div style="overflow-x:auto;">
-<input type="textbox" class="example-input" matInput (keyup)="applyFilter($event)"
-  placeholder="Search by name Email or role" #input>
+<div class="container">
+
+  <mat-form-field  appearance="outline" class="example-input">
+<input type="textbox" matInput (keyup)="applyFilter($event)"
+  placeholder="Search by name Email or role" #input></mat-form-field>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
 
@@ -23,10 +25,12 @@
   <!-- Position Column -->
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-    <td mat-cell *matCellDef="let element">
+        <td mat-cell *matCellDef="let element; let i = index">
 
       <ng-container *ngIf="element.edit; else notEdit">
-        <input value="{{element.name}}"/>
+        <mat-form-field>
+       <input matInput type="text" value="{{element.name}}">
+       </mat-form-field>
       </ng-container>
       <ng-template #notEdit>
         {{element.name}}
@@ -36,37 +40,52 @@
   </ng-container>
 
   <!-- Name Column -->
-  <ng-container matColumnDef="email">
-    <th mat-header-cell *matHeaderCellDef> Email </th>
-    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-  </ng-container>
+  <ng-container matColumnDef="email"> 
+    <th mat-header-cell *matHeaderCellDef  mat-sort-header> Email </th>
+    <td mat-cell *matCellDef="let element">
+      <ng-container *ngIf="element.edit; else notEdit1">
+      <mat-form-field>
+        <input matInput type="text" value="{{element.email}}" >
+      </mat-form-field>
+      </ng-container>
+          <ng-template #notEdit1>
+      {{element.email}}
+    </ng-template>
+  </td>
+</ng-container>
+  
 
   <!-- Weight Column -->
   <ng-container matColumnDef="role">
     <th mat-header-cell *matHeaderCellDef> Role</th>
-    <td mat-cell *matCellDef="let element"> {{element.role}} </td>
+    <td mat-cell *matCellDef="let element">
+    <ng-container *ngIf="element.edit; else notEdit2">
+      <mat-form-field>
+      <input matInput type="text" value="{{element.role}}">
+      </mat-form-field>
+    </ng-container>
+    <ng-template #notEdit2>
+      {{element.role}}
+    </ng-template>
+  </td>
   </ng-container>
 
 
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef> Actions </th>
     <td mat-cell *matCellDef="let row">
-      <mat-icon (click)="handleEdit(row)">launch</mat-icon>
+      <mat-icon (click)= "handleEdit(row)">launch</mat-icon>
       <mat-icon color="warn" class="white" (click)="handleDelete(row)">delete_outline</mat-icon>
     </td>
   </ng-container>
   
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *ngfor="let row; columns: displayedColumns;">
-    
-  </tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)" ></tr>
  
 
    </table>
      <p>
-  <button mat-fab extended color="accent" type="delete" class="btn btn-danger" (click)="deleteSelected()">Delete
-    selected</button>
+  <button mat-fab extended color="accent" type="delete" (click)="deleteSelected()">Delete selected</button>
   <mat-paginator  [pageSize]="10" [pageSizeOptions]="[5, 10]"  showFirstLastButtons>
   </mat-paginator>
 </p></div>
