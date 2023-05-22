@@ -58,11 +58,11 @@ export class AppComponent implements OnInit, OnDestroy {
        }
       )
      }
-     selectedIndex = -1;
+    //  selectedIndex = -1;
 
-       highLight(row:any) {
-       this.selectedIndex = row.id;
-      }
+    //    highLight(row:any) {
+    //    this.selectedIndex = row.id;
+    //   }
   
     changeTableRowColor(row: any) { 
       if(this.rowClicked === row) this.rowClicked = -1;
