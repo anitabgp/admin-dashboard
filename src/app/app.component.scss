@@ -1,21 +1,18 @@
 
-   body{
-    margin:10px;
-   }
    table,tr {
-     width: 100%;
+     width: 100vw;
      overflow-x:auto;
               }
               
       td, th {
-        width: 25%;
+        width: 25vw;
       }
        
       .example-container {
         display: flex;
         flex-direction: column;
-        width: 100%;
-        margin: 10px;
+        width: 100vw;
+       
              }
         
       
@@ -29,9 +26,9 @@
              
     .example-input {
      margin-top: 3%;
-     width: 100%;
+     width: 100vw;
      display: inline-block;
-     margin-left: 15px;
+     height:20px;
      }
   //     tr:hover,td:hover {
   //     background-color: hwb(0 72% 25%);
@@ -43,14 +40,14 @@
     .example-container {
       display: flex;
       flex-direction: column;
-      width: 100%;
+      width: 100vw;
       overflow-x:auto;
     }
   
     .mat-header-row {
       display: flex;
       flex-direction: column;
-      width: 100%;
+      width: 100vw;
     }
     table ,tr{
        display: inline-block;  
@@ -60,7 +57,7 @@
        td, th {
         display: flex;
         flex-direction: column;
-        width: 100%;
+        width: 100vw;
        }
         
   }
