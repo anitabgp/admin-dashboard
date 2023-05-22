@@ -58,11 +58,7 @@ export class AppComponent implements OnInit, OnDestroy {
        }
       )
      }
-    //  selectedIndex = -1;
-
-    //    highLight(row:any) {
-    //    this.selectedIndex = row.id;
-    //   }
+    
   
     changeTableRowColor(row: any) { 
       if(this.rowClicked === row) this.rowClicked = -1;
@@ -133,9 +129,9 @@ export class AppComponent implements OnInit, OnDestroy {
     
 
   /** The label for the checkbox on the passed row */
-  checkboxLabel(): string {
-    return "area-label";
-  }
+     checkboxLabel(): string {
+      return "area-label";
+     }
 
      checkboxLabel1(row: any): string {
       if (!row) {
