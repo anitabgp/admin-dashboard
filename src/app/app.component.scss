@@ -1,3 +1,4 @@
+
 .table-container {
   display: flex;
   flex-direction: column;
@@ -24,15 +25,21 @@ table {
   width: 80%;
   margin: 10%;
 }
-
+ 
 .example-input {
   margin-top: 20px;
   width: 100%;
   display: inline-block;
 
 }
-
-
+.mat-mdc-row:active { 
+  background-color: lightgray;
+}
+  .pagination {
+  
+    display: inline-block;
+    }
+   
 @media(max-width: 600px) {
   .mobile-label {
     width: 80px;
@@ -49,4 +56,8 @@ table {
     align-items: start;
     padding: 8px 24px;
   }
+  .pagination {
+    width: 60px;
+    display: inline-block;
+    }
 }

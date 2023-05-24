@@ -66,23 +66,22 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
 
-  changeTableRowColor(row: any) {
-    if (this.rowClicked === row) this.rowClicked = -1;
-    else this.rowClicked = row;
-  }
+
+
 
   toggle($event: any, row: any) {
     $event ? this.selection.toggle(row) : null;
     const hightlightIndex = this.data.findIndex(t => t.id === row.id);
-    let i = 0;
+    let i = this.paginator.pageIndex * this.paginator.pageSize;
     this.rowContainers.forEach((data: any) => {
       if (i === hightlightIndex) {
-        data.nativeElement.style.backgroundColor = 'lightgrey';
+        if (data.nativeElement.style.backgroundColor !== 'lightgrey')
+          data.nativeElement.style.backgroundColor = 'lightgrey';
+        else
+          data.nativeElement.style.backgroundColor = 'white';
       }
       i++;
-      
     })
-    
   }
 
   ngAfterViewInit() {
@@ -99,12 +98,21 @@ export class AppComponent implements OnInit, OnDestroy {
   toggleAllRows() {
     if (this.isCurrentPageSelected()) {
       this.selection.clear();
+      this.rowContainers.forEach((data: any) => {
+        data.nativeElement.style.backgroundColor = 'white';
+      })
       return;
     }
+
     // this.paginator.pageIndex*
     this.currentSelectedData = this.data.slice((this.paginator.pageIndex * this.paginator.pageSize),
       (this.paginator.pageIndex + 1) * this.paginator.pageSize);
+    this.selection.clear();
     this.selection.select(...this.currentSelectedData);
+    this.rowContainers.forEach((data: any) => {
+      if (data.nativeElement.style.backgroundColor !== 'lightgrey')
+        data.nativeElement.style.backgroundColor = 'lightgrey';
+    })
   }
 
   applyFilter(event: Event) {
@@ -115,7 +123,6 @@ export class AppComponent implements OnInit, OnDestroy {
       this.dataSource.paginator.firstPage();
     }
   }
-
   onKeydown(event: any, row: any, ele: any) {
     if (event.key === "Enter") {
       row['edit'] = false;
@@ -156,7 +163,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   checkboxLabel1(row: any): string {
     if (!row) {
-      return `${this.isCurrentPageSelected() ? 'deselect' : 'select'} 10`;
+      return `${this.isCurrentPageSelected() ? 'deselect' : 'select'} All`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
 

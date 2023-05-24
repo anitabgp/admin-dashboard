@@ -12,7 +12,7 @@
   <ng-container matColumnDef="select">
     <mat-header-cell *matHeaderCellDef>
       <mat-checkbox (change)="$event ? toggleAllRows() : null" [checked]="selection.hasValue() && isCurrentPageSelected()"
-        [indeterminate]="selection.hasValue() && !isCurrentPageSelected()" [aria-label]="checkboxLabel()" MaxLengthValidator="10">
+        [indeterminate]="selection.hasValue() && !isCurrentPageSelected()" [aria-label]="checkboxLabel()" >
       </mat-checkbox>
     </mat-header-cell>
     <mat-cell *matCellDef="let row">
@@ -23,31 +23,30 @@
   </ng-container>
  
   
-  <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+     <ng-container matColumnDef="name">
+       <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
         <mat-cell *matCellDef="let element; let i = index">
         <span class="mobile-label">Name:</span>
-      <ng-container *ngIf="element.edit; else notEdit">
-        <mat-form-field>
-       <input matInput type="text" value="{{element.name}}" (keydown)="onKeydown($event, element, 'name')">
+        <ng-container *ngIf="element.edit; else notEdit">
+        <mat-form-field appearance="outline" >
+        <input matInput type="text" value="{{element.name}}" (keydown)="onKeydown($event, element, 'name')">
        </mat-form-field>
-      </ng-container>
-      <ng-template #notEdit>
+        </ng-container>
+        <ng-template #notEdit>
         {{element.name}}
-      </ng-template>
-       </mat-cell>
-
-  </ng-container>
-
+        </ng-template>
+        </mat-cell>
+        </ng-container>
+   
   <!-- Name Column -->
-  <ng-container matColumnDef="email"> 
-    <mat-header-cell *matHeaderCellDef  mat-sort-header> Email 
-    </mat-header-cell>
-    <mat-cell *matCellDef="let element">
+    <ng-container matColumnDef="email"> 
+     <mat-header-cell *matHeaderCellDef  mat-sort-header> Email 
+     </mat-header-cell>
+     <mat-cell *matCellDef="let element">
       <span class="mobile-label">Email:</span>
-     <ng-container *ngIf="element.edit; else notEdit1">
-      <mat-form-field>
-      <input matInput type="text" value="{{element.email}}" (keydown)="onKeydown($event, element, 'email')" >
+      <ng-container *ngIf="element.edit; else notEdit1">
+      <mat-form-field appearance="outline" >
+      <input matInput type="text" value="{{element.email}}" (keydown)="onKeydown($event, element, 'email')"  >
       </mat-form-field>
       </ng-container>
         <ng-template #notEdit1>
@@ -60,18 +59,18 @@
   <!-- Weight Column -->
      <ng-container matColumnDef="role">
       <mat-header-cell *matHeaderCellDef> Role</mat-header-cell>
-      <mat-cell *matCellDef="let element">
+       <mat-cell *matCellDef="let element">
         <span class="mobile-label">Role:
         </span>
-      <ng-container *ngIf="element.edit; else notEdit2">
-      <mat-form-field>
-      <input matInput type="text" value="{{element.role}}" (keydown)="onKeydown($event, element, 'role')">
-      </mat-form-field>
-      </ng-container>
-      <ng-template #notEdit2>
+       <ng-container *ngIf="element.edit; else notEdit2">
+       <mat-form-field appearance="outline" >
+       <input matInput type="text" value="{{element.role}}" (keydown)="onKeydown($event, element, 'role') " >
+        </mat-form-field>
+        </ng-container>
+        <ng-template #notEdit2>
         {{element.role}}
-       </ng-template>
-       </mat-cell>
+        </ng-template>
+        </mat-cell>
         </ng-container>
 
 
@@ -85,12 +84,13 @@
       </ng-container>
   
        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-       <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="toggle($event, row)" #highlight></mat-row>
- 
-
-       </mat-table>
+       <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="toggle($event, row)" #highlight #rowClicked></mat-row>
+        </mat-table>
         <p>
        <button mat-fab extended color="accent" type="delete" (click)="deleteSelected()">Delete selected</button>
-        <mat-paginator  [pageSize]="10" [pageSizeOptions]="[5, 10]"  showFirstLastButtons>
-          </mat-paginator>
+                  <mat-paginator #pagination
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 20]"
+                 [showFirstLastButtons]="true">
+                </mat-paginator>
              </p></div>
