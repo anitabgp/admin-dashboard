@@ -61,3 +61,25 @@ table {
     display: inline-block;
     }
 }
+    
+@media(max-width: 400px) {
+  .mobile-label {
+    width: 60px;
+    display: inline-block;
+        font-weight: bold;
+  }
+
+  .mat-mdc-header-row {
+    display: none;
+  }
+
+  .mat-mdc-row { 
+    flex-direction: column;
+    align-items: start;
+    padding: 8px 24px;
+  }
+  .pagination {
+    width: 40px;
+    display: inline-block;
+    }
+}
