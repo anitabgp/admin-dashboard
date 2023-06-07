@@ -118,7 +118,7 @@ export class AppComponent implements OnInit, OnDestroy {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
+    
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -129,6 +129,7 @@ export class AppComponent implements OnInit, OnDestroy {
       row[ele] = event.target.value;
       this.dataSource = new MatTableDataSource(this.data);
       this.dataSource.paginator = this.paginator;
+      this.data = this.data.filter(data => data.id !== row.id);
     }
   }
 
