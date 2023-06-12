@@ -39,7 +39,7 @@ export class AppComponent implements OnInit, OnDestroy {
   @ViewChildren('highlight', { read: ElementRef }) rowContainers: any;
 
   constructor(private http: HttpClient, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this.mobileQuery = media.matchMedia('(max-width: 400px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this.mobileQueryListener);
   }
@@ -115,14 +115,7 @@ export class AppComponent implements OnInit, OnDestroy {
     })
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
+  
   onKeydown(event: any, row: any, ele: any) {
     if (event.key === "Enter") {
       row['edit'] = false;

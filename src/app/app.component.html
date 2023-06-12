@@ -1,12 +1,7 @@
 
 <div class="container">
-
-  <mat-form-field  appearance="outline" class="example-input">
-  <input matinput type="textbox" matInput (keyup)="applyFilter($event)"
-   placeholder="Search by name Email or role" #input>
-   </mat-form-field>
-
- <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8 table-container" matSort>
+<app-search></app-search>
+<mat-table #table [dataSource]="dataSource" class="mat-elevation-z8 table-container" matSort>
 
   <!-- Checkbox Column -->
   <ng-container matColumnDef="select">
