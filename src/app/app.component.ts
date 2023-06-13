@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild, OnDestroy, ViewEncapsulation, ElementRef,
 import { NgModule } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
-import { MatSort, Sort } from '@angular/material/sort';
+import { MatSort} from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ChangeDetectorRef } from '@angular/core';
