@@ -3,9 +3,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { EmployeeService } from './service/employee.service';
 @Component({
   selector: 'app-empployee-table',
   templateUrl: './employee-table.component.html',
@@ -32,7 +32,7 @@ export class EmployeeTableComponent implements OnChanges {
   @ViewChild(MatSort) sort: any;
   @ViewChildren('highlight', { read: ElementRef }) rowContainers: any;
 
-  constructor(private http: HttpClient, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+  constructor(private http: EmployeeService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
     this.mobileQuery = media.matchMedia('(max-width: 400px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this.mobileQueryListener);
@@ -48,14 +48,12 @@ export class EmployeeTableComponent implements OnChanges {
 
   ngOnInit() {
     this.userFilters.push({ names: 'name', value: 'role', emails: 'email' });
-
-    this.subscription = this.http.get("https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json").subscribe({
+    this.subscription = this.http.getEmployeeData().subscribe({
       next: (data) => {
         this.data = JSON.parse(JSON.stringify(data));
         this.dataSource = new MatTableDataSource(this.data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-
       },
       error: (e) => console.error(e),
       complete: () => {

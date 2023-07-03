@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EmployeeTableComponent } from './employee-table.component';
 import { MaterialModule } from '../material/material.module';
+import { EmployeeService } from './service/employee.service';
 
 @NgModule({
   declarations: [EmployeeTableComponent],
@@ -9,6 +10,8 @@ import { MaterialModule } from '../material/material.module';
     CommonModule,
     MaterialModule
   ],
-  exports:[EmployeeTableComponent]
+  exports:[EmployeeTableComponent],
+  
+  providers: [EmployeeService],
 })
 export class EmployeeTableModule { }

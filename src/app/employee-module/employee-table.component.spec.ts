@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EmpployeeTableComponent } from './employee-table.component';
+import { EmployeeTableComponent } from './employee-table.component';
 
 describe('EmpployeeTableComponent', () => {
-  let component: EmpployeeTableComponent;
-  let fixture: ComponentFixture<EmpployeeTableComponent>;
+  let component: EmployeeTableComponent;
+  let fixture: ComponentFixture<EmployeeTableComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [EmpployeeTableComponent]
+      declarations: [EmployeeTableComponent]
     });
-    fixture = TestBed.createComponent(EmpployeeTableComponent);
+    fixture = TestBed.createComponent(EmployeeTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
