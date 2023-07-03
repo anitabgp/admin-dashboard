@@ -12,7 +12,5 @@ export class EmployeeService {
   getEmployeeData(): Observable<any> {
     return this.http.get("https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json");
   }
-  handleEdit(row: any) {
-    row['edit'] = true;
-  }
+  
 }
