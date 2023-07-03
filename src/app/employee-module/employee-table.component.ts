@@ -1,18 +1,17 @@
-import { Component, OnInit, ViewChild, OnDestroy, ViewEncapsulation, ElementRef, ViewChildren, QueryList, Input, SimpleChanges, OnChanges } from '@angular/core';
-import { NgModule } from '@angular/core';
+import { Component, ViewChild, ElementRef, ViewChildren, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 @Component({
   selector: 'app-empployee-table',
-  templateUrl: './empployee-table.component.html',
-  styleUrls: ['./empployee-table.component.scss']
+  templateUrl: './employee-table.component.html',
+  styleUrls: ['./employee-table.component.scss']
 })
-export class EmpployeeTableComponent implements OnChanges {
+export class EmployeeTableComponent implements OnChanges {
   title = 'admin';
   displayedColumns: string[] = ['select', 'name', 'email', 'role', 'actions'];
   dataSource = new MatTableDataSource<any>();
@@ -46,7 +45,7 @@ export class EmpployeeTableComponent implements OnChanges {
       }
     }
   }
-  
+
   ngOnInit() {
     this.userFilters.push({ names: 'name', value: 'role', emails: 'email' });
 
@@ -71,6 +70,9 @@ export class EmpployeeTableComponent implements OnChanges {
 
   toggle($event: any, row: any) {
     $event ? this.selection.toggle(row) : null;
+    this.highlightRows(row);
+  }
+  private highlightRows(row: any) {
     const hightlightIndex = this.data.findIndex(t => t.id === row.id);
     let i = this.paginator.pageIndex * this.paginator.pageSize;
     this.rowContainers.forEach((data: any) => {
@@ -83,7 +85,6 @@ export class EmpployeeTableComponent implements OnChanges {
       i++;
     })
   }
-
   isCurrentPageSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.paginator.pageSize;
@@ -101,7 +102,6 @@ export class EmpployeeTableComponent implements OnChanges {
       return;
     }
 
-    // this.paginator.pageIndex*
     this.currentSelectedData = this.data.slice((this.paginator.pageIndex * this.paginator.pageSize),
       (this.paginator.pageIndex + 1) * this.paginator.pageSize);
     this.selection.clear();

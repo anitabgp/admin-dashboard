@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EmpployeeTableComponent } from './empployee-table.component';
+import { EmpployeeTableComponent } from './employee-table.component';
 
 describe('EmpployeeTableComponent', () => {
   let component: EmpployeeTableComponent;

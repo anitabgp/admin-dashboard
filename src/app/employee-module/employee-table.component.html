@@ -1,6 +1,4 @@
 <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8 table-container" matSort>
-
-    <!-- Checkbox Column -->
     <ng-container matColumnDef="select">
         <mat-header-cell *matHeaderCellDef>
             <mat-checkbox (change)="$event ? toggleAllRows() : null"
@@ -15,7 +13,6 @@
         </mat-cell>
     </ng-container>
 
-    <!-- Name Column -->
     <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
         <mat-cell *matCellDef="let element; let i = index">
@@ -31,7 +28,6 @@
         </mat-cell>
     </ng-container>
 
-    <!-- Email Column -->
     <ng-container matColumnDef="email">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Email
         </mat-header-cell>
@@ -49,8 +45,6 @@
         </mat-cell>
     </ng-container>
 
-
-    <!-- Role Column -->
     <ng-container matColumnDef="role">
         <mat-header-cell *matHeaderCellDef> Role</mat-header-cell>
         <mat-cell *matCellDef="let element">
@@ -67,8 +61,6 @@
             </ng-template>
         </mat-cell>
     </ng-container>
-
-    <!-- Actions Column -->
     <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef>Actions </mat-header-cell>
         <mat-cell *matCellDef="let row">
@@ -78,17 +70,14 @@
         </mat-cell>
     </ng-container>
 
-    <!-- Highlight Row -->
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="toggle($event, row)" #highlight
         #rowClicked></mat-row>
 </mat-table>
 
-<!-- Delete Button -->
 <p>
     <button mat-fab extended color="accent" type="delete" (click)="deleteSelected()">Delete selected</button>
 
-    <!-- Paginator -->
     <mat-paginator #pagination [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
     </mat-paginator>
 </p>

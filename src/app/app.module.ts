@@ -1,25 +1,25 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { MaterialModule } from './material/material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { HttpClientModule } from '@angular/common/http';
-import { SearchComponent } from './search/search.component';
-import { EmpployeeTableComponent } from './empployee-table/empployee-table.component';
+import { EmployeeTableModule } from './employee-module/employee-table.module';
+import { MaterialModule } from './material/material.module';
+import { SearchModule } from './search-module/search-module.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    SearchComponent,
-    EmpployeeTableComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    EmployeeTableModule,
+    SearchModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
